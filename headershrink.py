@@ -4,6 +4,7 @@
 # Usage:
 #   ./shrinkheader.py <curl_syntax>
 
+import gzip
 import time
 import argparse
 import itertools
@@ -37,6 +38,14 @@ def get_url(args):
     print_error('Missing URL!')
 
 
+def get_rest_options(args):
+    optlist = []
+    for a in args:
+        if a.startswith('-'):
+            optlist.append(a)
+    return optlist
+
+
 def get_method(args):
     if args.request is not None:
         return args.request[0]
@@ -62,19 +71,23 @@ def data_list_to_str(datalist):
         for d in datalist:
             str += '&' + d[0]
         str = str[1:]
-    return str
+    return bytes(str, 'utf-8')
 
 
 def call(reqdict):
     request = urllib.request.Request(reqdict['url'],
-                                     data=reqdict['data'].encode('utf-8'),
+                                     data=reqdict['data'],
                                      headers=reqdict['headers'])
     request.method = reqdict['method']
 
     try:
         response = urllib.request.urlopen(request)
-        content = response.read().decode('utf-8')
         status = response.getcode()
+        rawcontent = response.read()
+        try:
+            content = rawcontent.decode('utf-8')
+        except UnicodeDecodeError:
+            content = gzip.decompress(rawcontent).decode('utf-8')
         return status, content
     except urllib.error.HTTPError as error:
         return error.code, ''
@@ -111,6 +124,10 @@ def iterate_headers(reqdict, repdict):
                 if len(reqdict['data']) > 0:
                     output += ' --data \'' + reqdict['data'] + '\''
 
+                if len(reqdict['options']) > 0:
+                    for o in reqdict['options']:
+                        output += ' ' + o
+
                 return output
 
 
@@ -131,6 +148,7 @@ def main():
     requestdict['url'] = get_url(rest)
     requestdict['method'] = get_method(args)
     requestdict['data'] = data_list_to_str(args.data)
+    requestdict['options'] = get_rest_options(rest)
     requestdict['headers'] = header_list_to_dict(args.header)
     requestdict['rawheaders'] = args.header
 
