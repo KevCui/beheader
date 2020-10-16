@@ -26,7 +26,8 @@ def parseArgs():
     parser.add_argument('-X', '--request', nargs=1, help='Request method')
     parser.add_argument('-H', '--header', nargs=1, action='append',
                         help='Request headers')
-    parser.add_argument('-d', '--data', '--data-raw', nargs=1, action='append',
+    parser.add_argument('-d', '--data', '--data-raw', '--data-binary',
+                        nargs=1, action='append',
                         help='Request data')
     return parser.parse_known_args()
 
@@ -122,7 +123,8 @@ def iterate_headers(reqdict, repdict):
                     print_info('Header is not needed ¯\\_(ツ)_/¯')
 
                 if len(reqdict['data']) > 0:
-                    output += ' --data \'' + reqdict['data'] + '\''
+                    output += ' --data \'' \
+                        + reqdict['data'].decode('utf-8') + '\''
 
                 if len(reqdict['options']) > 0:
                     for o in reqdict['options']:
