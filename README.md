@@ -38,8 +38,6 @@ $ ./headershrink.py curl 'https://duckduckgo.com/js/spice/dictionary/hyphenation
   -H 'accept-language: en-US,en;q=0.9' \
   --compressed
 
-[INFO] Checking combination 0
-[INFO] >> Header(s): {}
 [INFO] Header is not needed ¯\_(ツ)_/¯
 curl -X GET "https://duckduckgo.com/js/spice/dictionary/hyphenation/test" --compressed
 ```
@@ -61,17 +59,21 @@ $ ./headershrink.py curl 'https://ssc.33across.com/api/v1/hb' \
   --data-binary '{"imp":[{"banner":{"format":[{"w":728,"h":90},{"w":970,"h":90}],"ext":{"ttx":{"viewability":{"amount":100}}}},"ext":{"ttx":{"prod":"siab"}}}],"site":{"id":"beuMI6FAar6QjTaKlId8sQ","page":"https://www.w3schools.com/tags/ref_httpmethods.asp"},"id":"72a047f5071ac","user":{"ext":{"consent":"CO7ZHtzO7ZHtzDlAkAENA7CsAP_AAH_AACiQG2Nf_X_fb3_j-_599_t0eY1f9_7_v20zjheds-8Nyd_X_L8X_2M7vB36pr4KuR4ku3bBAQdtHOncTQmR6IlVqTLsbk2Mr7NKJ7PEmlsbe2dYGH9_n9XT_ZKZ79_v___7________77______3_v7wNsAJMNS-AiyEsYCSaNKoUQIQriQ6AEAFFCMLRNYQErgp2VwEfoIGACA1ARgRAgxBRiyCAAAAAJKIgBADwQCIAiAQAAgBUgIQAEaAILACQMAgAFANCwAiiCECQgyOCo5RAgIkWignkjAEoudjCCEEAAA"}},"regs":{"ext":{"gdpr":1,"us_privacy":"1---"}},"ext":{"ttx":{"prebidStartedAt":1602882648477,"caller":[{"name":"prebidjs","version":"3.27.1"}]}},"source":{"ext":{"schain":{"ver":"1.0","complete":1,"nodes":[{"asi":"snigelweb.com","sid":"7088","domain":"w3schools.com","hp":1}]}}}}' \
   --compressed
 
-[INFO] Checking combination 0
-[INFO] >> Header(s): {}
-[INFO] Checking combination 1
-[INFO] >> Header(s): {'authority': 'ssc.33across.com'}
-[INFO] >> Header(s): {'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'}
-[INFO] >> Header(s): {'content-type': 'text/plain'}
-[INFO] Found min. combination: content-type
+[INFO] Check Header combination: {'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'accept-language': 'en-US,en;q=0.9'}
+[INFO] Check Header combination: {'authority': 'ssc.33across.com', 'user-agent': 'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36', 'content-type': 'text/plain', 'accept': '*/*', 'origin': 'https://www.w3schools.com', 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'cors', 'sec-fetch-dest': 'empty', 'referer': 'https://www.w3schools.com/tags/ref_httpmethods.asp'}
+[INFO] Must-have headers(s): content-type
 curl -X POST "https://ssc.33across.com/api/v1/hb" -H 'content-type: text/plain' --data '{"imp":[{"banner":{"format":[{"w":728,"h":90},{"w":970,"h":90}],"ext":{"ttx":{"viewability":{"amount":100}}}},"ext":{"ttx":{"prod":"siab"}}}],"site":{"id":"beuMI6FAar6QjTaKlId8sQ","page":"https://www.w3schools.com/tags/ref_httpmethods.asp"},"id":"72a047f5071ac","user":{"ext":{"consent":"CO7ZHtzO7ZHtzDlAkAENA7CsAP_AAH_AACiQG2Nf_X_fb3_j-_599_t0eY1f9_7_v20zjheds-8Nyd_X_L8X_2M7vB36pr4KuR4ku3bBAQdtHOncTQmR6IlVqTLsbk2Mr7NKJ7PEmlsbe2dYGH9_n9XT_ZKZ79_v___7________77______3_v7wNsAJMNS-AiyEsYCSaNKoUQIQriQ6AEAFFCMLRNYQErgp2VwEfoIGACA1ARgRAgxBRiyCAAAAAJKIgBADwQCIAiAQAAgBUgIQAEaAILACQMAgAFANCwAiiCECQgyOCo5RAgIkWignkjAEoudjCCEEAAA"}},"regs":{"ext":{"gdpr":1,"us_privacy":"1---"}},"ext":{"ttx":{"prebidStartedAt":1602882648477,"caller":[{"name":"prebidjs","version":"3.27.1"}]}},"source":{"ext":{"schain":{"ver":"1.0","complete":1,"nodes":[{"asi":"snigelweb.com","sid":"7088","domain":"w3schools.com","hp":1}]}}}}' --compressed
 ```
 
-The result of cURL command line is saved in `<unixtime>.curl`.
+The result of cURL command line is saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
 
 ---
 

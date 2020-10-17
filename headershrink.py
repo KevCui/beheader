@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 #
 # Usage:
-#   ./shrinkheader.py <curl_syntax>
+#   ./headershrink.py <curl_syntax>
 
+import copy
 import gzip
 import time
 import argparse
-import itertools
 import urllib.request
 
 
@@ -101,36 +101,59 @@ def write_to_file(filename, content):
 
 
 def iterate_headers(reqdict, repdict):
-    headers = reqdict['rawheaders']
-    for i in range(0, len(headers) + 1):
-        print_info('Checking combination ' + str(i))
-        for c in list(itertools.combinations(headers, i)):
-            reqdict['headers'] = header_list_to_dict(c)
-            print_info('>> Header(s): ' + str(reqdict['headers']))
-            status, content = call(reqdict)
-            if repdict['ref']['status'] == status \
-                    and repdict['ref']['length'] == len(content):
+    i = 0
+    iteratedict = copy.deepcopy(reqdict)
+    iteratedict['headers'] = {}
+    status, content = call(iteratedict)
+    if repdict['ref']['status'] == status \
+            and repdict['ref']['length'] == len(content):
+        return
 
-                output = 'curl -X ' + reqdict['method'] \
-                    + ' "' + reqdict['url'] + '"'
+    for k, v in reqdict['headers'].items():
+        i += 1
+        repdict[i] = {}
+        iteratedict = copy.deepcopy(reqdict)
+        iteratedict['headers'].pop(k)
+        print_info('Check Header combination: ' + str(iteratedict['headers']))
+        status, content = call(iteratedict)
 
-                if reqdict['headers']:
-                    print_info('Found min. combination: '
-                               + ', '.join(reqdict['headers'].keys()))
-                    for h, v in reqdict['headers'].items():
-                        output += ' -H \'' + h + ': ' + v + '\''
-                else:
-                    print_info('Header is not needed ¯\\_(ツ)_/¯')
+        if repdict['ref']['status'] == status \
+                and repdict['ref']['length'] == len(content):
+            repdict[i]['necessary'] = False
+        else:
+            repdict[i]['necessary'] = True
+        repdict[i]['length'] = len(content)
+        repdict[i]['status'] = status
+        repdict[i]['content'] = content
+        repdict[i]['header'] = k
+        repdict[i]['headervalue'] = v
 
-                if len(reqdict['data']) > 0:
-                    output += ' --data \'' \
-                        + reqdict['data'].decode('utf-8') + '\''
 
-                if len(reqdict['options']) > 0:
-                    for o in reqdict['options']:
-                        output += ' ' + o
+def generate_report(reqdict, repdict):
+    output = 'curl -X ' + reqdict['method'] \
+        + ' "' + reqdict['url'] + '"'
 
-                return output
+    if len(repdict) == 1:
+        print_info('Header is not needed ¯\\_(ツ)_/¯')
+    else:
+        requireheader = ''
+        for i in range(1, len(repdict)):
+            if repdict[i]['necessary'] is True:
+                requireheader += ', ' + repdict[i]['header']
+                output += ' -H \'' + repdict[i]['header'] \
+                    + ': ' + repdict[i]['headervalue'] + '\''
+        print_info('Must-have header(s): \033[93m\033[1m'
+                   + requireheader[2:] + '\033[0m\033[0m')
+
+    if len(reqdict['data']) > 0:
+        output += ' --data \'' + reqdict['data'].decode('utf-8') + '\''
+
+    if len(reqdict['options']) > 0:
+        for o in reqdict['options']:
+            output += ' ' + o
+
+    print(output)
+    write_to_file(str(int(time.time())) + '.curl', output)
 
 
 def main():
@@ -161,9 +184,8 @@ def main():
     reportdict['ref']['content'] = refcontent
     reportdict['ref']['headers'] = requestdict['headers']
 
-    result = iterate_headers(requestdict, reportdict)
-    print(result)
-    write_to_file(str(int(time.time())) + '.curl', result)
+    iterate_headers(requestdict, reportdict)
+    generate_report(requestdict, reportdict)
 
 
 if __name__ == '__main__':
