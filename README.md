@@ -21,6 +21,14 @@ optional arguments:
                         Request data
 ```
 
+### Workflow
+
+- Get cURL command line from browser or other app
+
+- Run script `./headershrink.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
+
+- The result is also saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
+
 ### Example
 
 - GET request:
@@ -73,7 +81,11 @@ $ ./headershrink.py curl 'https://ssc.33across.com/api/v1/hb' \
 curl -X POST "https://ssc.33across.com/api/v1/hb" -H 'content-type: text/plain' --data '{"imp":[{"banner":{"format":[{"w":728,"h":90},{"w":970,"h":90}],"ext":{"ttx":{"viewability":{"amount":100}}}},"ext":{"ttx":{"prod":"siab"}}}],"site":{"id":"beuMI6FAar6QjTaKlId8sQ","page":"https://www.w3schools.com/tags/ref_httpmethods.asp"},"id":"72a047f5071ac","user":{"ext":{"consent":"CO7ZHtzO7ZHtzDlAkAENA7CsAP_AAH_AACiQG2Nf_X_fb3_j-_599_t0eY1f9_7_v20zjheds-8Nyd_X_L8X_2M7vB36pr4KuR4ku3bBAQdtHOncTQmR6IlVqTLsbk2Mr7NKJ7PEmlsbe2dYGH9_n9XT_ZKZ79_v___7________77______3_v7wNsAJMNS-AiyEsYCSaNKoUQIQriQ6AEAFFCMLRNYQErgp2VwEfoIGACA1ARgRAgxBRiyCAAAAAJKIgBADwQCIAiAQAAgBUgIQAEaAILACQMAgAFANCwAiiCECQgyOCo5RAgIkWignkjAEoudjCCEEAAA"}},"regs":{"ext":{"gdpr":1,"us_privacy":"1---"}},"ext":{"ttx":{"prebidStartedAt":1602882648477,"caller":[{"name":"prebidjs","version":"3.27.1"}]}},"source":{"ext":{"schain":{"ver":"1.0","complete":1,"nodes":[{"asi":"snigelweb.com","sid":"7088","domain":"w3schools.com","hp":1}]}}}}' --compressed
 ```
 
-The result of cURL command line is saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
+## How it works?
+
+First the script will run once with all provided headers to get the response status and the length of response content as the references. Then the scripts runs N times (N = number of total headers), each time has 1 header removed, to save all results. In the end, the script will check the results and compare them against reference status and length to determine if the certain header is necessary or not. If a header is removed, but the result is the same as the references, then this header is not necessary.
+
+Be aware that this script uses the status of the response and length of the response as the references, not checking the exact content of the response. In some cases, the response may contain dynamic contents causing the false detection.
 
 ---
 
