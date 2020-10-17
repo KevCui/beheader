@@ -1,6 +1,6 @@
 # Beheader 
 
-> Cut off unnecessary headers of a cURL request
+> Cut off unnecessary headers in a cURL request
 
 ## Table of Contents
 
