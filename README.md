@@ -2,6 +2,8 @@
 
 > Cut off unnecessary headers in a cURL request
 
+<img src=".github/demo/demo.gif" align="center">
+
 ## Table of Contents
 
 - [Why I need it?](#why-i-need-it)
