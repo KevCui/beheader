@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Usage:
-#   ./behead.py <curl_syntax>
+#   ./beheader.py <curl_syntax>
 
 import copy
 import gzip
@@ -22,7 +22,7 @@ def print_error(message):
 
 def parseArgs():
     parser = argparse.ArgumentParser(
-        usage='behead.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]')
+        usage='beheader.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]')
     parser.add_argument('-X', '--request', nargs=1, help='Request method')
     parser.add_argument('-H', '--header', nargs=1, action='append',
                         help='Request headers')

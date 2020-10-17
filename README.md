@@ -1,6 +1,14 @@
-# Beheading
+# Beheader 
 
 > Cut off unnecessary headers of a cURL request
+
+## Table of Contents
+
+- [Why I need it?](#why-i-need-it)
+- [Usage](#usage)
+  - [Workflow](#workflow)
+  - [Example](#example)
+- [How it works?](#how-it-works)
 
 ## Why I need it?
 
@@ -9,7 +17,7 @@ Not all the HTTP request headers impact the HTTP response: some are mandatory/in
 ## Usage
 
 ```
-usage: behead.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]
+usage: beheader.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -25,7 +33,7 @@ optional arguments:
 
 - Get cURL command line from browser or other app
 
-- Run script `./behead.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
+- Run script `./beheader.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
 
 - The result is also saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
 
@@ -34,7 +42,7 @@ optional arguments:
 - GET request:
 
 ```bash
-$ ./behead.py curl 'https://duckduckgo.com/js/spice/dictionary/hyphenation/test' \
+$ ./beheader.py curl 'https://duckduckgo.com/js/spice/dictionary/hyphenation/test' \
   -H 'authority: duckduckgo.com' \
   -H 'accept: application/json, text/javascript, */*; q=0.01' \
   -H 'user-agent: AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36' \
@@ -53,7 +61,7 @@ curl -X GET "https://duckduckgo.com/js/spice/dictionary/hyphenation/test" --comp
 - POST request
 
 ```bash
-$ ./behead.py curl 'https://ssc.33across.com/api/v1/hb' \
+$ ./beheader.py curl 'https://ssc.33across.com/api/v1/hb' \
   -H 'authority: ssc.33across.com' \
   -H 'user-agent: AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36' \
   -H 'content-type: text/plain' \
