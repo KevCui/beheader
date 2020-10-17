@@ -33,9 +33,9 @@ optional arguments:
 
 ### Workflow
 
-- Get cURL command line from browser or other app
+- Get/Copy the cURL command line from browser or other app
 
-- Run script `./beheader.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
+- Run script `./beheader.py <cur_syntax>` to generate a new cURL command line with the shrunk headers as a result.
 
 - The result is also saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
 
