@@ -1,4 +1,4 @@
-# Beheader 
+# Beheader
 
 > Cut off unnecessary headers in a cURL request
 
@@ -12,7 +12,7 @@
 
 ## Why I need it?
 
-Not all the HTTP request headers impact the HTTP response: some are mandatory/innocent, some are redundant/guilty. If you want to get rid of guilty ones, this script will do the job and make cURL request look nice & clean.
+Not all the HTTP request headers impact the HTTP response: some are mandatory/innocent, some are redundant/guilty. If you want to get rid of the guilty ones, this script will do the beheading job and make cURL request look nice & clean.
 
 ## Usage
 
