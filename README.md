@@ -1,15 +1,15 @@
-# headershrink
+# Beheading
 
-> Find out the minimum required headers of a cURL request
+> Cut off unnecessary headers of a cURL request
 
 ## Why I need it?
 
-Not all the HTTP request headers impact the HTTP response: some are mandatory, some are redundant. If you want to get rid of unnecessary headers, this script will do the job and make cURL request look nice & clean.
+Not all the HTTP request headers impact the HTTP response: some are mandatory/innocent, some are redundant/guilty. If you want to get rid of guilty ones, this script will do the job and make cURL request look nice & clean.
 
 ## Usage
 
 ```
-usage: headershrink.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]
+usage: behead.py curl [URL] [-X REQUEST] [-H HEADER] [-d DATA]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -25,7 +25,7 @@ optional arguments:
 
 - Get cURL command line from browser or other app
 
-- Run script `./headershrink.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
+- Run script `./behead.py <cur_syntax>` to get a new cURL command line with the shrunk headers as a result.
 
 - The result is also saved in `<unixtime>.curl`. To run it, simply execute `bash <unixtime>.curl`.
 
@@ -34,7 +34,7 @@ optional arguments:
 - GET request:
 
 ```bash
-$ ./headershrink.py curl 'https://duckduckgo.com/js/spice/dictionary/hyphenation/test' \
+$ ./behead.py curl 'https://duckduckgo.com/js/spice/dictionary/hyphenation/test' \
   -H 'authority: duckduckgo.com' \
   -H 'accept: application/json, text/javascript, */*; q=0.01' \
   -H 'user-agent: AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36' \
@@ -53,7 +53,7 @@ curl -X GET "https://duckduckgo.com/js/spice/dictionary/hyphenation/test" --comp
 - POST request
 
 ```bash
-$ ./headershrink.py curl 'https://ssc.33across.com/api/v1/hb' \
+$ ./behead.py curl 'https://ssc.33across.com/api/v1/hb' \
   -H 'authority: ssc.33across.com' \
   -H 'user-agent: AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36' \
   -H 'content-type: text/plain' \
